@@ -12,4 +12,5 @@ Random Matrices: Theory Appl., 04, 1550019 (2015). http://arxiv.org/abs/1507.016
 * This package is work in progress. Suggestions and comments are welcome. 
 A MATLAB version is also available https://github.com/dobriban/EigenEdge/.
 The latter is much more developed, and has a detailed documentation with examples.
-In time, this R 
+In time, this R package should have more functionality added. 
+
