@@ -22,7 +22,7 @@ spectrode <- function(t = c(1,2,3), w = c(1,1,1)/3, gamma = 1/2,ep = 1e-4) {
   source("evaluate_inverse_ST.R")
   
   #Error checking
-  if (any(t < 0)) {
+  if (any(t < 0)) { #may need t<=0
     stop("Positive eigenvalues required")
   }
   if (any(w < 0)) {
@@ -170,7 +170,7 @@ if (gamma < 1) {
 #function for ODE solving
 MP_diff <- function(time,v_arr,param) { #transform to complex then to real
   v <- v_arr[1]+1i*v_arr[2]
-  d <- (1/v^2 - gamma* sum( w*(t^(-1) + v)^(-2)))^(-1)
+  d <- (1/v^2 - gamma* sum( w*(t^(-1) + v)^(-2), na.rm = TRUE))^(-1)
   list(c(Re(d),Im(d)))
 }
 
@@ -184,7 +184,7 @@ for (i in 2:(num_clus-1)) {
   endpoint_2 <-  z_l_endpoints[i] #upper endpoint in f-space
   l_hat[i-1] <- endpoint_1
   u_hat[i-1] <-  endpoint_2
-  
+
   #the grid within the i-th support interval
   grid_current <-  seq(endpoint_1,endpoint_2, length=M)
 
@@ -192,7 +192,7 @@ for (i in 2:(num_clus-1)) {
   c0 <-  compute_esd_fp(t,w,gamma,ep, grid_current[1])
   v_start <- c0$v
   #find dual Stieltjes transform using ode
-  ode_out <- ode(y=c(Re(v_start),Im(v_start)),times=grid_current,func=MP_diff,rtol=ep,atol=ep)
+  ode_out <- ode(y=c(Re(v_start),Im(v_start)),times=grid_current,func=MP_diff,rtol=ep/10,atol=ep/10)
   v0 <- ode_out[,2]+1i*ode_out[,3]
   
   #set the output
