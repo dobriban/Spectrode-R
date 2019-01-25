@@ -121,7 +121,12 @@ if (gamma >1) { #if upper half maximum may exceed 0
   #   v <- seq(ep, v_U-ep,  length=M)
   #   ist <- evaluate_inverse_ST(t,w,gamma, v)
   # }
-  z_u_endpoints[num_clus] <- ist$maxz
+  
+  #old
+  #z_u_endpoints[num_clus] <- ist$maxz
+  
+  #new
+  z_u_endpoints[num_clus] <- ist$maxf
   num_grid_points[num_clus] <- ist$ind_max #number of grid points in last interval
   z_grid[num_clus,1:ist$ind_max] <- ist$grid[1:ist$ind_max]
   v_grid[num_clus,1:ist$ind_max] <- v[1:ist$ind_max]
