@@ -14,3 +14,5 @@ A MATLAB version is also available https://github.com/dobriban/EigenEdge/.
 The latter is much more developed, and has a detailed documentation with examples.
 In time, this R package should have more functionality added. 
 
+
+We thank Haeran Cho for pointing out a typo in the code.
